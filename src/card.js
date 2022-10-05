@@ -1,6 +1,6 @@
 const Card = () => {
     const view = `
-       <h1>CARD</h1>`
+       <h1>CARD3</h1>`
     return view;
 }
 
