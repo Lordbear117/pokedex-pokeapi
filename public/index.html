@@ -6,11 +6,91 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./../css/main.css">
 </head>
 
 <body>
-    <div id="app"></div>
-
+    <header>
+        <!--Navigation Bar-->
+        <nav class="navbar" style="font-size: 20px;">
+            <div class="navbar__container">
+                <div class="logo" align="left">
+                    <img src="./../assets/pokemon_logo.svg" alt="Pokemon Logo" height="70px" width="180px">
+                </div>
+                <div class="navbar__toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <ul class="navbar__menu">
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="kanto-page">
+                            <div class="tooltip">
+                                Kanto Pokedex
+                                <span class="tooltiptext">See Kantonian Pokemon</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="johto-page">
+                            <div class="tooltip">
+                                Johto Pokedex
+                                <span class="tooltiptext">See Jhoto Pokemons</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="hoenn-page">
+                            <div class="tooltip">
+                                Hoenn Pokedex
+                                <span class="tooltiptext">See Hoenn Pokemons</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="sinnoh-page">
+                            <div class="tooltip">Sinnoh Pokedex
+                                <span class="tooltiptext">See Sinnoh Pokemon</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="wishlist-page">
+                            <div class="tooltip">Unova Pokedex
+                                <span class="tooltiptext">See Unova Pokemons</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="wishlist-page">
+                            <div class="tooltip">Kalos Pokedex
+                                <span class="tooltiptext">See Kalos Pokemons</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="wishlist-page">
+                            <div class="tooltip">Alola Pokedex
+                                <span class="tooltiptext">See Alolan Pokemons</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="wishlist-page">
+                            <div class="tooltip">Galar Pokedex
+                                <span class="tooltiptext">See Galarian Pokemons</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <h1 style="padding: 25px;">
+        <img class="pokeball" src="./../assets/pokeball.svg" alt="pokeball image" width="30" />
+        Kanto PokeDex
+        <img class="pokeball" src="./../assets/pokeball.svg" alt="pokeball image" width="30" />
+    </h1>
     <script src="./../src/bundle.js"></script>
 </body>
 
