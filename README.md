@@ -8,4 +8,7 @@ browserify ./src/main.js -o ./src/bundle.js
 npm install -g browserify
 rimraf node_modules
 
-*
+*Instalar watchify(dependencia que regenera el bundle cuando detecta cambios y sirve como demonio en desarrollo)
+npm install -g watchify
+npm install watchify
+watchify ./src/main.js -o ./src/bundle.js
