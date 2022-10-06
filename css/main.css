@@ -1,5 +1,7 @@
 @charset "UTF-8";/*CSS For nav bar*/
-
+/*Importing the required fonts*/
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Titan+One&display=swap");
 
 * {
@@ -10,10 +12,6 @@
     scroll-behavior: smooth;
 }
 /* #region Body Styles*/
-/*Importing the required fonts*/
-@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Lato:300,400&display=swap');
-
 body {
     background: #C9D6FF;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
@@ -360,10 +358,6 @@ h1 {
 
 .logo{
     position: absolute;
-    border-top-style: solid;
-    border-left-style: solid;
-    border-right-style: solid;
-    border-width: 5px;
 }
 
 header{
@@ -432,12 +426,12 @@ header{
 }
   
 .navbar__links:hover {
-    color: #9518fc;
+    color: #ffdde1;
     transition: all 0.3s ease;
 }
 
 .navbar__links:active{
-  color: red;
+  color: #c31432;
 }
 
 .active{

@@ -1,7 +1,23 @@
 const API = require("./api");
 const CARD = require('./card');
 
-API.a();
-const app = document.getElementById('app');
+//Elements
+const mainContainer = document.getElementById("mainContainer");
 
-app.innerHTML = CARD.Card();
+const kantoPage = document.getElementById("kanto-page");
+// const kantoPage = document.getElementById("kanto-page");
+// const kantoPage = document.getElementById("kanto-page");
+// const kantoPage = document.getElementById("kanto-page");
+// const kantoPage = document.getElementById("kanto-page");
+// const kantoPage = document.getElementById("kanto-page");
+// const kantoPage = document.getElementById("kanto-page");
+// const kantoPage = document.getElementById("kanto-page");
+
+
+//events
+kantoPage.addEventListener('click', () => {
+    console.log("Kanto Event")
+})
+
+
+mainContainer.innerHTML = (CARD.Card());
