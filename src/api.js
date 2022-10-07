@@ -1,5 +1,5 @@
-var a = function a() {
-    console.log('Hello world!')
-};
-
-module.exports.a = a;
+const fetchRegion = (region) => {
+    let url = `https://pokeapi.co/api/v2/pokedex/${region}`
+    return url
+}
+module.exports.fecthRegion = fetchRegion;
