@@ -1,5 +1,6 @@
 const COLOR = require('./colors');
 const TYPE = require('./pokemon-types');
+const POKEMONCLASS = require('./pokemon-class');
 
 // Pokemons from first region
 const pokemons_num = 151;
@@ -49,7 +50,7 @@ function createPokemonCard(pokemon) {
     const ability = pokemon.abilities.map(ability=> ability.ability.name[0].toUpperCase()+ability.ability.name.slice(1)).join(", ");
 
     // Function to send dato to the card.
-    
+    let POKEMONCLASS = new pokemonData(id,name,primaryType,secondaryType,color,icon1,icon2,height,weight,ability);
 	
 }
 
