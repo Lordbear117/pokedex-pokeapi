@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <link rel="stylesheet" href="./../css/main.css">
 </head>
 
@@ -95,7 +96,88 @@
         <h1 style="padding: 25px;">
             <img class="pokeball" src="./../assets/pokeball.svg" alt="pokeball image" width="30" />
             <span id="region_title">Kanto Pokedex</span>
-            <div class="container" id="mainContainer">
+            <div class="main-container" id="mainContainer">
+                <div class="pokemon">
+                    <div class="img-container">
+                        <img src="https://assets.pokemon.com//assets/cms2/img/pokedex/detail/025.png"
+                            alt="${name} front image" />
+                    </div>
+                    <div class="info">
+                        <span class="number"><i>#0025</i></span>
+                        <h3 class="name">Pikachu</h3>
+                        <small class="type">
+                            <b>Tipo: </b>
+                            <div class="pokemon-types">
+                                Electrico
+                                <img class=" primary-icon" src="./../assets/pokeball.svg" alt=" icon image" />
+                            </div>
+                            <div>
+                                Luchador
+                                <img class="secondary-icon" src="./../assets/pokeball.svg" />
+                            </div>
+                        </small>
+                        <small>
+                            <span><B>Altura: m</B></span>
+                            <br>
+                            <span><B>Peso: kg</B></span>
+                        </small>
+                        <br>
+                        <br>
+                        <small>
+                            <details>
+                                <summary><B>Movimientos</B></summary>
+                                <p>foo</p>
+                            </details>
+                            <br>
+                            <details>
+                                <summary><B>Habilidades</B></summary>
+                                <p>Impactrueno</p>
+                            </details>
+                        </small>
+                    </div>
+                </div>
+                <div class="pokemon">
+                    <div class="img-container" align="center">
+                        <img src="https://assets.pokemon.com//assets/cms2/img/pokedex/detail/025.png"
+                            alt="${name} front image" />
+                    </div>
+                    <div class="info" align="center">
+                        <span class="number"><i>#${id}</i></span>
+                        <h3 class="name">${name}</h3>
+                        <small class="type">
+                            <b>Type: </b>
+                            <table align="center">
+                                <tr>
+                                    <td align="left">${ptype}</td>
+                                    <td><img class="primary-icon" src="${icon1}" alt="${ptype} icon image" width="20" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">${stype}</td>
+                                    <td><img class="secondary-icon" src="${icon2}" width="20" /></td>
+                                </tr>
+                            </table>
+                        </small>
+                        <small>
+                            <span><B>Alturat: m</B></span>
+                            <br>
+                            <span><B>Peso: kg</B></span>
+                        </small>
+                        <br>
+                        <br>
+                        <small>
+                            <details>
+                                <summary><B>Movimientos</B></summary>
+                                <p></p>
+                            </details>
+                            <br>
+                            <details>
+                                <summary><B>Habilidades</B></summary>
+                                <p></p>
+                            </details>
+                        </small>
+                    </div>
+                </div>
             </div>
     </main>
     <script src="./../src/bundle.js"></script>
