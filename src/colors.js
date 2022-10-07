@@ -1,3 +1,5 @@
+//Pokemon colors related to their types
+
 const colors = {
     Normal: '#d1d0a4',
     Fire: '#d66214',
