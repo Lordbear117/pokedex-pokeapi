@@ -3,10 +3,11 @@ const TYPE = require('./pokemon-types');
 const POKEMONCLASS = require('./pokemon-class');
 
 // Pokemons from first region
-const pokemons_num = 151;
+const firstPokemon = 1;
+const lastPokemon = 151;
 
 const fetchPokemons = async () => {
-	for (let i = 1; i <= pokemons_num; i++) {
+	for (let i = firstPokemon; i <= lastPokemon; i++) {
 		await getPokemon(i);
 	}
 };
