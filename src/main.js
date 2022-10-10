@@ -24,7 +24,7 @@ const navItemsList = [
 //#region  EVENTS
 navItemsList.forEach(async (e) => {
     e.addEventListener('click', async () => {
-        regionTitle.textContent = `${e.children[0].children[0].textContent}`;
+        regionTitle.textContent = `${e.children[0].children[0].textContent} Pokedex`;
         await fillScreen(e.id);
     })
 })
