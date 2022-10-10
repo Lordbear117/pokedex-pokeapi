@@ -1,9 +1,5 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-const COLOR = require('./colors');
-const TYPE = require('./pokemon-types');
-const POKEMONCLASS = require('./pokemon-class');
-
-
+// Get pokemons from regions with switch cases from nav bar elements.
 const fetchPokemons = async (pokemonRegion) => {
     let firstPokemon;
     let lastPokemon;
@@ -50,16 +46,17 @@ const fetchPokemons = async (pokemonRegion) => {
     return pokemonsList;
 };
 
+// Get pokemons from Pokeapi, fetchPokemons calls getPokemon.
+//And stores the data in 'const pokemon'.
 const getPokemon = async id => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const response = await fetch(url);
     const pokemon = await response.json();
-
     return pokemon;
 };
 
 module.exports.fetchPokemons = fetchPokemons;
-},{"./colors":3,"./pokemon-class":5,"./pokemon-types":6}],2:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 const COLORS = require("./colors");
 const POKEMONCLASS = require('./pokemon-class');
 
@@ -155,6 +152,7 @@ const navItemsList = [
     galarPage = document.getElementById("galar_page")
 ]
 //#endregion
+
 //#region  EVENTS
 navItemsList.forEach(async (e) => {
     e.addEventListener('click', async () => {
@@ -175,12 +173,6 @@ const mobileMenu = () => {
 
 menu.addEventListener('click', mobileMenu);
 
-// Show active menu when scrolling
-const highlightMenu = () => {
-    const elem = document.querySelector('.highlight');
-
-    let scrollPos = window.scrollY;
-}
 //  Close mobile Menu when clicking on a menu item
 const hideMobileMenu = () => {
     const menuBars = document.querySelector('.is-active');
@@ -189,9 +181,19 @@ const hideMobileMenu = () => {
         menuLinks.classList.remove('active');
     }
 };
+//  Close normal Menu when clicking on a menu item
+const hideMenu = () => {
+    const menuBars = document.querySelector('.is-active');
+    if (window.innerWidth >= 768 && menuBars) {
+        menu.classList.toggle('is-active');
+        menuLinks.classList.remove('active');
+    }
+};
 
 menuLinks.addEventListener('click', hideMobileMenu);
+menuLinks.addEventListener('click', hideMenu);
 //#endregion
+
 //#region FUNCTIONS
 const fillScreen = async (id) => {
     pokeball_loader.style.display = 'block';

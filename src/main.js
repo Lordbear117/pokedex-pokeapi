@@ -21,6 +21,7 @@ const navItemsList = [
     galarPage = document.getElementById("galar_page")
 ]
 //#endregion
+
 //#region  EVENTS
 navItemsList.forEach(async (e) => {
     e.addEventListener('click', async () => {
@@ -41,12 +42,6 @@ const mobileMenu = () => {
 
 menu.addEventListener('click', mobileMenu);
 
-// Show active menu when scrolling
-const highlightMenu = () => {
-    const elem = document.querySelector('.highlight');
-
-    let scrollPos = window.scrollY;
-}
 //  Close mobile Menu when clicking on a menu item
 const hideMobileMenu = () => {
     const menuBars = document.querySelector('.is-active');
@@ -55,9 +50,19 @@ const hideMobileMenu = () => {
         menuLinks.classList.remove('active');
     }
 };
+//  Close normal Menu when clicking on a menu item
+const hideMenu = () => {
+    const menuBars = document.querySelector('.is-active');
+    if (window.innerWidth >= 768 && menuBars) {
+        menu.classList.toggle('is-active');
+        menuLinks.classList.remove('active');
+    }
+};
 
 menuLinks.addEventListener('click', hideMobileMenu);
+menuLinks.addEventListener('click', hideMenu);
 //#endregion
+
 //#region FUNCTIONS
 const fillScreen = async (id) => {
     pokeball_loader.style.display = 'block';
