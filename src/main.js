@@ -4,9 +4,11 @@ const COLOR = require('./colors');
 const TYPE = require('./pokemon-types');
 const POKEMONCLASS = require('./pokemon-class');
 
-//Elements
+//#region ELEMENTS
 const mainContainer = document.getElementById("mainContainer");
 const regionTitle = document.getElementById("region_title")
+const pokeball_loader = document.getElementById('pokeball_loaderid');
+const body = document.getElementsByTagName("body");
 
 const navItemsList = [
     kantoPage = document.getElementById("kanto_page"),
@@ -18,7 +20,8 @@ const navItemsList = [
     alolaPage = document.getElementById("alola_page"),
     galarPage = document.getElementById("galar_page")
 ]
-//events
+//#endregion
+//#region  EVENTS
 navItemsList.forEach(async (e) => {
     e.addEventListener('click', async () => {
         regionTitle.textContent = `${e.children[0].children[0].textContent}`;
@@ -26,16 +29,48 @@ navItemsList.forEach(async (e) => {
     })
 })
 
-//functions
+//Display the responsiveness of the nav bar
+const menu = document.querySelector('#mobile-menu');
+const menuLinks = document.querySelector('.navbar__menu');
+
+// Display Mobile Menu
+const mobileMenu = () => {
+    menu.classList.toggle('is-active');
+    menuLinks.classList.toggle('active');
+};
+
+menu.addEventListener('click', mobileMenu);
+
+// Show active menu when scrolling
+const highlightMenu = () => {
+    const elem = document.querySelector('.highlight');
+
+    let scrollPos = window.scrollY;
+}
+//  Close mobile Menu when clicking on a menu item
+const hideMobileMenu = () => {
+    const menuBars = document.querySelector('.is-active');
+    if (window.innerWidth <= 768 && menuBars) {
+        menu.classList.toggle('is-active');
+        menuLinks.classList.remove('active');
+    }
+};
+
+menuLinks.addEventListener('click', hideMobileMenu);
+//#endregion
+//#region FUNCTIONS
 const fillScreen = async (id) => {
-    mainContainer.innerHTML = "";
-    let pokemonList = await API.fetchPokemons(id);
-    console.log(pokemonList)
-    pokemonList.forEach(item => {
-        createPokemonCard(item);
+    pokeball_loader.style.display = 'block';
+    mainContainer.style.opacity = '0.5';
+    await API.fetchPokemons(id).then(data => {
+        mainContainer.style.opacity = '1';
+        mainContainer.innerHTML = "";
+        pokeball_loader.style.display = 'none';
+        data.forEach(item => {
+            createPokemonCard(item);
+        })
     })
 }
-
 
 function createPokemonCard(pokemon) {
 
@@ -50,6 +85,7 @@ function createPokemonCard(pokemon) {
     const primaryType = pokemon_types[0];
 
     const secondaryType = new Array(pokemon_types[1]).filter(item => item != undefined);
+    if (secondaryType.length == 0) secondaryType.push("")
 
     // Set the color using the name of the type and the colors array with types names.
     const color = COLOR.colors[primaryType];
@@ -70,6 +106,6 @@ function createPokemonCard(pokemon) {
     card.innerHTML = CARD.Card(pokemonData);
     mainContainer.append(card);
 }
-
+//#endregion
 //onInit
 fillScreen('kanto_page');

@@ -143,7 +143,7 @@ const POKEMONCLASS = require('./pokemon-class');
 
 const Card = (pokemon) => {
     const view = `
-<div class="pokemon">
+<div class="pokemon" style="background-color: ${pokemon.color}">
     <div class="img-container">
         <img src="https://assets.pokemon.com//assets/cms2/img/pokedex/detail/${pokemon.id}.png" alt="${pokemon.name} front image" />
     </div>
@@ -154,12 +154,14 @@ const Card = (pokemon) => {
             <b>Tipo: </b>
             <div class="pokemon-types">
                 ${pokemon.primaryType}
-                <img class=" primary-icon" src=${pokemon.icon1[0]} alt="./../assets/pokeball.svg" />
+                <img class=" primary-icon" src=${pokemon.icon1[0]}  />
             </div>
+            ${pokemon.secondaryType[0] == "" ? `<div><br></div>` : `
             <div>
             ${pokemon.secondaryType[0]}
-                <img class="secondary-icon" src=${pokemon.icon2[0]} alt="./../assets/pokeball.svg" />
+                <img class="secondary-icon" src=${pokemon.icon2[0]}  />
             </div>
+            `}
         </small>
         <small>
             <span><B>Altura: ${pokemon.height} m</B></span>
@@ -169,11 +171,6 @@ const Card = (pokemon) => {
         <br>
         <br>
         <small>
-            <details>
-                <summary><B>Movimientos</B></summary>
-                <p>${pokemon.ability}</p>
-            </details>
-            <br>
             <details>
                 <summary><B>Habilidades</B></summary>
                 <p>${pokemon.ability}</p>
@@ -219,9 +216,11 @@ const COLOR = require('./colors');
 const TYPE = require('./pokemon-types');
 const POKEMONCLASS = require('./pokemon-class');
 
-//Elements
+//#region ELEMENTS
 const mainContainer = document.getElementById("mainContainer");
 const regionTitle = document.getElementById("region_title")
+const pokeball_loader = document.getElementById('pokeball_loaderid');
+const body = document.getElementsByTagName("body");
 
 const navItemsList = [
     kantoPage = document.getElementById("kanto_page"),
@@ -233,7 +232,8 @@ const navItemsList = [
     alolaPage = document.getElementById("alola_page"),
     galarPage = document.getElementById("galar_page")
 ]
-//events
+//#endregion
+//#region  EVENTS
 navItemsList.forEach(async (e) => {
     e.addEventListener('click', async () => {
         regionTitle.textContent = `${e.children[0].children[0].textContent}`;
@@ -241,16 +241,48 @@ navItemsList.forEach(async (e) => {
     })
 })
 
-//functions
+//Display the responsiveness of the nav bar
+const menu = document.querySelector('#mobile-menu');
+const menuLinks = document.querySelector('.navbar__menu');
+
+// Display Mobile Menu
+const mobileMenu = () => {
+    menu.classList.toggle('is-active');
+    menuLinks.classList.toggle('active');
+};
+
+menu.addEventListener('click', mobileMenu);
+
+// Show active menu when scrolling
+const highlightMenu = () => {
+    const elem = document.querySelector('.highlight');
+
+    let scrollPos = window.scrollY;
+}
+//  Close mobile Menu when clicking on a menu item
+const hideMobileMenu = () => {
+    const menuBars = document.querySelector('.is-active');
+    if (window.innerWidth <= 768 && menuBars) {
+        menu.classList.toggle('is-active');
+        menuLinks.classList.remove('active');
+    }
+};
+
+menuLinks.addEventListener('click', hideMobileMenu);
+//#endregion
+//#region FUNCTIONS
 const fillScreen = async (id) => {
-    mainContainer.innerHTML = "";
-    let pokemonList = await API.fetchPokemons(id);
-    console.log(pokemonList)
-    pokemonList.forEach(item => {
-        createPokemonCard(item);
+    pokeball_loader.style.display = 'block';
+    mainContainer.style.opacity = '0.5';
+    await API.fetchPokemons(id).then(data => {
+        mainContainer.style.opacity = '1';
+        mainContainer.innerHTML = "";
+        pokeball_loader.style.display = 'none';
+        data.forEach(item => {
+            createPokemonCard(item);
+        })
     })
 }
-
 
 function createPokemonCard(pokemon) {
 
@@ -265,6 +297,7 @@ function createPokemonCard(pokemon) {
     const primaryType = pokemon_types[0];
 
     const secondaryType = new Array(pokemon_types[1]).filter(item => item != undefined);
+    if (secondaryType.length == 0) secondaryType.push("")
 
     // Set the color using the name of the type and the colors array with types names.
     const color = COLOR.colors[primaryType];
@@ -285,7 +318,7 @@ function createPokemonCard(pokemon) {
     card.innerHTML = CARD.Card(pokemonData);
     mainContainer.append(card);
 }
-
+//#endregion
 //onInit
 fillScreen('kanto_page');
 },{"./api":1,"./card":2,"./colors":3,"./pokemon-class":5,"./pokemon-types":6}],5:[function(require,module,exports){

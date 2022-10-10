@@ -33,7 +33,7 @@ h1 {
 /* #region Body Styles*/
 .main-container{
 	display:grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: auto;
     grid-gap: 1rem;
 }
@@ -50,7 +50,6 @@ h1 {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-color: hsl(0, 0%, 93%);
 	border-radius: 20px;
 	box-shadow: 0 3px 15px hsla(0, 0%, 39%, 0.5);
 	margin: 10px;
@@ -61,6 +60,11 @@ h1 {
 /*Animation for the pokeballs to move*/
 .pokeball{
 	animation: rotate 2s infinite;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 @keyframes rotate {

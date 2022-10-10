@@ -3,7 +3,7 @@ const POKEMONCLASS = require('./pokemon-class');
 
 const Card = (pokemon) => {
     const view = `
-<div class="pokemon">
+<div class="pokemon" style="background-color: ${pokemon.color}">
     <div class="img-container">
         <img src="https://assets.pokemon.com//assets/cms2/img/pokedex/detail/${pokemon.id}.png" alt="${pokemon.name} front image" />
     </div>
@@ -14,12 +14,14 @@ const Card = (pokemon) => {
             <b>Tipo: </b>
             <div class="pokemon-types">
                 ${pokemon.primaryType}
-                <img class=" primary-icon" src=${pokemon.icon1[0]} alt="./../assets/pokeball.svg" />
+                <img class=" primary-icon" src=${pokemon.icon1[0]}  />
             </div>
+            ${pokemon.secondaryType[0] == "" ? `<div><br></div>` : `
             <div>
             ${pokemon.secondaryType[0]}
-                <img class="secondary-icon" src=${pokemon.icon2[0]} alt="./../assets/pokeball.svg" />
+                <img class="secondary-icon" src=${pokemon.icon2[0]}  />
             </div>
+            `}
         </small>
         <small>
             <span><B>Altura: ${pokemon.height} m</B></span>
@@ -29,11 +31,6 @@ const Card = (pokemon) => {
         <br>
         <br>
         <small>
-            <details>
-                <summary><B>Movimientos</B></summary>
-                <p>${pokemon.ability}</p>
-            </details>
-            <br>
             <details>
                 <summary><B>Habilidades</B></summary>
                 <p>${pokemon.ability}</p>
