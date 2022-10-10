@@ -4,15 +4,13 @@ const TYPE = require('./pokemon-types');
 const POKEMONCLASS = require('./pokemon-class');
 
 // Pokemons from first region
-const firstPokemon = 1;
-const lastPokemon = 151;
 
-switch (pokemonRegion) {
+/*switch (pokemonRegion) {
     case Kanto:
         firstPokemon = 1;
         lastPokemon = 151;
         break;
-     case Johto:
+    case Johto:
         firstPokemon = 152;
         lastPokemon = 251;
         break;
@@ -28,85 +26,168 @@ switch (pokemonRegion) {
         firstPokemon = 494;
         lastPokemon = 649;
         break;
-     case Kalos:
-         firstPokemon = 650;
-         lastPokemon = 721;
-          break;
+    case Kalos:
+        firstPokemon = 650;
+        lastPokemon = 721;
+        break;
     case Alola:
-         firstPokemon = 722;
-         lastPokemon = 809;
-          break;
+        firstPokemon = 722;
+        lastPokemon = 809;
+        break;
     case Galar:
-         firstPokemon = 810;
-         lastPokemon = 898;
-          break;
+        firstPokemon = 810;
+        lastPokemon = 898;
+        break;
     default:
         break;
-}
+}*/
 
 
-const fetchPokemons = async () => {
-	for (let i = firstPokemon; i <= lastPokemon; i++) {
-		await getPokemon(i);
-	}
+const fetchPokemons = async (pokemonRegion) => {
+    let firstPokemon;
+    let lastPokemon;
+    switch (pokemonRegion) {
+        case 'kanto_page':
+            firstPokemon = 1;
+            lastPokemon = 151;
+            break;
+        case 'johto_page':
+            firstPokemon = 152;
+            lastPokemon = 251;
+            break;
+        case 'hoenn_page':
+            firstPokemon = 252;
+            lastPokemon = 386;
+            break;
+        case 'sinnoh_page':
+            firstPokemon = 387;
+            lastPokemon = 493;
+            break;
+        case 'unova_page':
+            firstPokemon = 494;
+            lastPokemon = 649;
+            break;
+        case 'kalos_page':
+            firstPokemon = 650;
+            lastPokemon = 721;
+            break;
+        case 'alola_page':
+            firstPokemon = 722;
+            lastPokemon = 809;
+            break;
+        case 'galar_page':
+            firstPokemon = 810;
+            lastPokemon = 898;
+            break;
+        default:
+            break;
+    }
+    let pokemonsList = [];
+    for (let i = firstPokemon; i <= lastPokemon; i++) {
+        pokemonsList.push(await getPokemon(i));
+    }
+    return pokemonsList;
 };
 
 // Get 151 pokemons from Pokeapi, fetchPokemons calls getPokemon 151 times.
 //And stores the data in 'const pokemon'.
 const getPokemon = async id => {
-	const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-	const response = await fetch(url);
-	const pokemon = await response.json();
-	createPokemonCard(pokemon);
+    const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    const response = await fetch(url);
+    const pokemon = await response.json();
+    //createPokemonCard(pokemon);
+    //console.log(pokemon)
+    return pokemon;
 };
 
-// Function to create cards with pokemons data
+/*// Function to create cards with pokemons data
 function createPokemonCard(pokemon) {
 
     //CONST
-	
-	const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
+
+    const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
     // Padstart for 3 numbers position with '0' at the start.
-	const id = pokemon.id.toString().padStart(3, '0')
-	
+    const id = pokemon.id.toString().padStart(3, '0')
+
     // Get an array with pokemon types (Normal, Fire, water, etc.). Can be up to 2 types. First letter toUpperCase.
-    const pokemon_types = pokemon.types.map(type => type.type.name[0].toUpperCase()+type.type.name.slice(1));
-    
+    const pokemon_types = pokemon.types.map(type => type.type.name[0].toUpperCase() + type.type.name.slice(1));
+
     const primaryType = pokemon_types[0];
 
     const secondaryType = new Array(pokemon_types[1]).filter(item => item != undefined);
-	
+
     // Set the color using the name of the type and the colors array with types names.
     const color = COLOR.colors[primaryType];
-    
+
     // Set the icons paths for the pokemon types
     const icon1 = new Array(TYPE.TypeIcons[primaryType]);
     const icon2 = new Array(TYPE.TypeIcons[secondaryType]).filter(item => item != undefined);
-	
-    const height = pokemon.height/10;
-	
-    const weight = pokemon.weight/10;
-	
-    const ability = pokemon.abilities.map(ability=> ability.ability.name[0].toUpperCase()+ability.ability.name.slice(1)).join(", ");
+
+    const height = pokemon.height / 10;
+
+    const weight = pokemon.weight / 10;
+
+    const ability = pokemon.abilities.map(ability => ability.ability.name[0].toUpperCase() + ability.ability.name.slice(1)).join(", ");
 
     // Function to send dato to the card.
-    let POKEMONCLASS = new pokemonData(id,name,primaryType,secondaryType,color,icon1,icon2,height,weight,ability);
-	
-}
+    let POKEMONCLASS = new pokemonData(id, name, primaryType, secondaryType, color, icon1, icon2, height, weight, ability);
 
-fetchPokemons();
+}*/
+
+//fetchPokemons();
+
+module.exports.fetchPokemons = fetchPokemons;
 },{"./colors":3,"./pokemon-class":5,"./pokemon-types":6}],2:[function(require,module,exports){
-const COLORS = require('./colors')
+const COLORS = require("./colors");
+const POKEMONCLASS = require('./pokemon-class');
 
-const Card = (props) => {
+const Card = (pokemon) => {
     const view = `
-       <h1 style="background: ${COLORS.colors.Dark}">CARD3</h1>
-    `
+<div class="pokemon">
+    <div class="img-container">
+        <img src="https://assets.pokemon.com//assets/cms2/img/pokedex/detail/${pokemon.id}.png" alt="${pokemon.name} front image" />
+    </div>
+    <div class="info">
+        <span class="number"><i>#${pokemon.id}</i></span>
+        <h3 class="name">${pokemon.name}</h3>
+        <small class="type">
+            <b>Tipo: </b>
+            <div class="pokemon-types">
+                ${pokemon.primaryType}
+                <img class=" primary-icon" src=${pokemon.icon1[0]} alt="./../assets/pokeball.svg" />
+            </div>
+            <div>
+            ${pokemon.secondaryType[0]}
+                <img class="secondary-icon" src=${pokemon.icon2[0]} alt="./../assets/pokeball.svg" />
+            </div>
+        </small>
+        <small>
+            <span><B>Altura: ${pokemon.height} m</B></span>
+            <br>
+            <span><B>Peso: ${pokemon.weight} kg</B></span>
+        </small>
+        <br>
+        <br>
+        <small>
+            <details>
+                <summary><B>Movimientos</B></summary>
+                <p>${pokemon.ability}</p>
+            </details>
+            <br>
+            <details>
+                <summary><B>Habilidades</B></summary>
+                <p>${pokemon.ability}</p>
+            </details>
+        </small>
+    </div>
+</div>
+`;
     return view;
-}
+};
 
 module.exports.Card = Card;
-},{"./colors":3}],3:[function(require,module,exports){
+
+},{"./colors":3,"./pokemon-class":5}],3:[function(require,module,exports){
 //Pokemon colors related to their types
 
 const colors = {
@@ -134,6 +215,9 @@ module.exports.colors = colors;
 },{}],4:[function(require,module,exports){
 const API = require("./api");
 const CARD = require('./card');
+const COLOR = require('./colors');
+const TYPE = require('./pokemon-types');
+const POKEMONCLASS = require('./pokemon-class');
 
 //Elements
 const mainContainer = document.getElementById("mainContainer");
@@ -150,34 +234,79 @@ const navItemsList = [
     galarPage = document.getElementById("galar_page")
 ]
 //events
-
-navItemsList.forEach(e => {
-    e.addEventListener('click', () => {
-        regionTitle.textContent = `${e.children[0].children[0].textContent}`
-        console.log(e.children[0].children[0].textContent)
+navItemsList.forEach(async (e) => {
+    e.addEventListener('click', async () => {
+        regionTitle.textContent = `${e.children[0].children[0].textContent}`;
+        await fillScreen(e.id);
     })
 })
 
+//functions
+const fillScreen = async (id) => {
+    mainContainer.innerHTML = "";
+    let pokemonList = await API.fetchPokemons(id);
+    console.log(pokemonList)
+    pokemonList.forEach(item => {
+        createPokemonCard(item);
+    })
+}
 
-},{"./api":1,"./card":2}],5:[function(require,module,exports){
+
+function createPokemonCard(pokemon) {
+
+    //CONST
+    const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
+    // Padstart for 3 numbers position with '0' at the start.
+    const id = pokemon.id.toString().padStart(3, '0')
+
+    // Get an array with pokemon types (Normal, Fire, water, etc.). Can be up to 2 types. First letter toUpperCase.
+    const pokemon_types = pokemon.types.map(type => type.type.name[0].toUpperCase() + type.type.name.slice(1));
+
+    const primaryType = pokemon_types[0];
+
+    const secondaryType = new Array(pokemon_types[1]).filter(item => item != undefined);
+
+    // Set the color using the name of the type and the colors array with types names.
+    const color = COLOR.colors[primaryType];
+
+    // Set the icons paths for the pokemon types
+    const icon1 = new Array(TYPE.TypeIcons[primaryType]);
+    const icon2 = new Array(TYPE.TypeIcons[secondaryType]).filter(item => item != undefined);
+
+    const height = pokemon.height / 10;
+
+    const weight = pokemon.weight / 10;
+
+    const ability = pokemon.abilities.map(ability => ability.ability.name[0].toUpperCase() + ability.ability.name.slice(1)).join(", ");
+
+    // Function to send dato to the card.
+    let pokemonData = new POKEMONCLASS.pokemonData(id, name, primaryType, secondaryType, color, icon1, icon2, height, weight, ability);
+    let card = document.createElement('div');
+    card.innerHTML = CARD.Card(pokemonData);
+    mainContainer.append(card);
+}
+
+//onInit
+fillScreen('kanto_page');
+},{"./api":1,"./card":2,"./colors":3,"./pokemon-class":5,"./pokemon-types":6}],5:[function(require,module,exports){
 // Class for pokemon data
 
 class pokemonData {
-    constructor(id,name,primaryType,secondaryType,color,icon1,icon2,height,weight,ability) {
-    this.id = id;
-    this.name = name;
-    this.primaryType = primaryType;
-    this.secondaryType = secondaryType;
-    this.color = color;
-    this.icon1 = icon1;
-    this.icon2 = icon2;
-    this.height = height;
-    this.weight = weight;
-    this.ability = ability;
-     }
-  }
+    constructor(id, name, primaryType, secondaryType, color, icon1, icon2, height, weight, ability) {
+        this.id = id;
+        this.name = name;
+        this.primaryType = primaryType;
+        this.secondaryType = secondaryType;
+        this.color = color;
+        this.icon1 = icon1;
+        this.icon2 = icon2;
+        this.height = height;
+        this.weight = weight;
+        this.ability = ability;
+    }
+}
 
-  module.exports.pokemonClass = pokemonClass;
+module.exports.pokemonData = pokemonData;
 },{}],6:[function(require,module,exports){
 //Pokemon types icons paths
 
