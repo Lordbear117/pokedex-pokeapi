@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./../css/main.css">
+</head>
+
+<body>
+    <header>
+        <!--Navigation Bar-->
+        <nav class="navbar" style="font-size: 20px;">
+            <div class="navbar__container">
+                <div class="logo" align="left">
+                    <img src="./../assets/pokedex_logo.png" alt="Pokemon Logo" height="70px" width="180px">
+                </div>
+                <div class="navbar__toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <ul class="navbar__menu">
+
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="dummy">
+                            <div class="tooltip">
+                                <span>Select a Region</span>
+                                <span class="tooltiptext">Pokemon regions</span>
+                            </div>
+                        </a>
+                    </li>
+
+
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="kanto_page">
+                            <div class="tooltip">
+                                <span>Kanto</span>
+                                <span class="tooltiptext">Ver los pokemones de Kanto</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="johto_page">
+                            <div class="tooltip">
+                                <span>Johto</span>
+                                <span class="tooltiptext">Ver los pokemones de Jhoto</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="hoenn_page">
+                            <div class="tooltip">
+                                <span>Hoenn</span>
+                                <span class="tooltiptext">Ver los pokemones de Hoenn</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="sinnoh_page">
+                            <div class="tooltip">
+                                <span>Sinnoh</span>
+                                <span class="tooltiptext">Ver los pokemones de Sinnoh</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="unova_page">
+                            <div class="tooltip">
+                                <span>Unova</span>
+                                <span class="tooltiptext">Ver los pokemones Unova</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="kalos_page">
+                            <div class="tooltip">
+                                <span>Kalos</span>
+                                <span class="tooltiptext">Ver los pokemones de Kalos</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="alola_page">
+                            <div class="tooltip">
+                                <span>Alola</span>
+                                <span class="tooltiptext">Ver los pokemones Alola</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#" class="navbar__links" id="galar_page">
+                            <div class="tooltip">
+                                <span>Galar</span>
+                                <span class="tooltiptext">Ver los pokemones Galarian</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1 style="padding: 25px;">
+            <span id="region_title">Kanto Pokedex</span>
+            
+            <div class="pokeball_loader" id="pokeball_loaderid">
+                <h2>Cargando...</h2>
+                <img class="pokeball" src="./../assets/pokeball.svg" alt="pokeball image" width="100" />
+            </div>
+            <div class="main-container" id="mainContainer">
+            </div>
+    </main>
+    <script src="./../src/bundle.js"></script>
+</body>
+
+</html>
