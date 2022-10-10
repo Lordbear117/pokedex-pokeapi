@@ -1,10 +1,64 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-const fetchRegion = (region) => {
-    let url = `https://pokeapi.co/api/v2/pokedex/${region}`
-    return url
+const COLOR = require('./colors');
+const TYPE = require('./pokemon-types');
+const POKEMONCLASS = require('./pokemon-class');
+
+// Pokemons from first region
+const firstPokemon = 1;
+const lastPokemon = 151;
+
+const fetchPokemons = async () => {
+	for (let i = firstPokemon; i <= lastPokemon; i++) {
+		await getPokemon(i);
+	}
+};
+
+// Get 151 pokemons from Pokeapi, fetchPokemons calls getPokemon 151 times.
+//And stores the data in 'const pokemon'.
+const getPokemon = async id => {
+	const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+	const response = await fetch(url);
+	const pokemon = await response.json();
+	createPokemonCard(pokemon);
+};
+
+// Function to create cards with pokemons data
+function createPokemonCard(pokemon) {
+
+    //CONST
+	
+	const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
+    // Padstart for 3 numbers position with '0' at the start.
+	const id = pokemon.id.toString().padStart(3, '0')
+	
+    // Get an array with pokemon types (Normal, Fire, water, etc.). Can be up to 2 types. First letter toUpperCase.
+    const pokemon_types = pokemon.types.map(type => type.type.name[0].toUpperCase()+type.type.name.slice(1));
+    
+    const primaryType = pokemon_types[0];
+
+    const secondaryType = new Array(pokemon_types[1]).filter(item => item != undefined);
+	
+    // Set the color using the name of the type and the colors array with types names.
+    const color = COLOR.colors[primaryType];
+    
+    // Set the icons paths for the pokemon types
+    const icon1 = new Array(TYPE.TypeIcons[primaryType]);
+    const icon2 = new Array(TYPE.TypeIcons[secondaryType]).filter(item => item != undefined);
+	
+    const height = pokemon.height/10;
+	
+    const weight = pokemon.weight/10;
+	
+    const ability = pokemon.abilities.map(ability=> ability.ability.name[0].toUpperCase()+ability.ability.name.slice(1)).join(", ");
+
+    // Function to send dato to the card.
+    let POKEMONCLASS = new pokemonData(id,name,primaryType,secondaryType,color,icon1,icon2,height,weight,ability);
+	
 }
-module.exports.fecthRegion = fetchRegion;
-},{}],2:[function(require,module,exports){
+
+fetchPokemons();
+
+},{"./colors":3,"./pokemon-class":5,"./pokemon-types":6}],2:[function(require,module,exports){
 const COLORS = require('./colors')
 
 const Card = (props) => {
@@ -15,6 +69,8 @@ const Card = (props) => {
 
 module.exports.Card = Card;
 },{"./colors":3}],3:[function(require,module,exports){
+//Pokemon colors related to their types
+
 const colors = {
     Normal: '#d1d0a4',
     Fire: '#d66214',
@@ -65,4 +121,48 @@ navItemsList.forEach(e => {
 })
 
 
-},{"./api":1,"./card":2}]},{},[4]);
+},{"./api":1,"./card":2}],5:[function(require,module,exports){
+// Class for pokemon data
+
+class pokemonData {
+    constructor(id,name,primaryType,secondaryType,color,icon1,icon2,height,weight,ability) {
+    this.id = id;
+    this.name = name;
+    this.primaryType = primaryType;
+    this.secondaryType = secondaryType;
+    this.color = color;
+    this.icon1 = icon1;
+    this.icon2 = icon2;
+    this.height = height;
+    this.weight = weight;
+    this.ability = ability;
+     }
+  }
+
+  module.exports.pokemonClass = pokemonClass;
+},{}],6:[function(require,module,exports){
+//Pokemon types icons paths
+
+const TypeIcons = {
+	Normal: './../assets/pokemon-icons/NormalIcon.svg',
+	Fire: './../assets/pokemon-icons/FireIcon.svg',
+	Water: './../assets/pokemon-icons/WaterIcon.svg',
+	Electric: './../assets/pokemon-icons/ElectricIcon.svg',
+	Grass: './../assets/pokemon-icons/GrassIcon.svg',
+	Ice: './../assets/pokemon-icons/IceIcon.svg',
+	Fighting: './../assets/pokemon-icons/FightingIcon.svg',
+	Poison: './../assets/pokemon-icons/PoisonIcon.svg',
+	Ground: './../assets/pokemon-icons/GroundIcon.svg',
+	Flying: './../assets/pokemon-icons/FlyingIcon.svg',
+	Psychic: './../assets/pokemon-icons/PsychicIcon.svg',
+	Bug: './../assets/pokemon-icons/BugIcon.svg',
+	Rock: './../assets/pokemon-icons/RockIcon.svg',
+	Ghost: './../assets/pokemon-icons/GhostIcon.svg',
+	Dragon: './../assets/pokemon-icons/DragonIcon.svg',
+	Dark: './../assets/pokemon-icons/DarkIcon.svg',
+	Steel: './../assets/pokemon-icons/SteelIcon.svg',
+	Fairy: './../assets/pokemon-icons/FairyIcon.svg'
+};
+
+module.exports.TypeIcons = TypeIcons;
+},{}]},{},[4]);
