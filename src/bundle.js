@@ -7,6 +7,44 @@ const POKEMONCLASS = require('./pokemon-class');
 const firstPokemon = 1;
 const lastPokemon = 151;
 
+switch (pokemonRegion) {
+    case Kanto:
+        firstPokemon = 1;
+        lastPokemon = 151;
+        break;
+     case Johto:
+        firstPokemon = 152;
+        lastPokemon = 251;
+        break;
+    case Hoenn:
+        firstPokemon = 252;
+        lastPokemon = 386;
+        break;
+    case Sinnoh:
+        firstPokemon = 387;
+        lastPokemon = 493;
+        break;
+    case Unova:
+        firstPokemon = 494;
+        lastPokemon = 649;
+        break;
+     case Kalos:
+         firstPokemon = 650;
+         lastPokemon = 721;
+          break;
+    case Alola:
+         firstPokemon = 722;
+         lastPokemon = 809;
+          break;
+    case Galar:
+         firstPokemon = 810;
+         lastPokemon = 898;
+          break;
+    default:
+        break;
+}
+
+
 const fetchPokemons = async () => {
 	for (let i = firstPokemon; i <= lastPokemon; i++) {
 		await getPokemon(i);
@@ -57,13 +95,13 @@ function createPokemonCard(pokemon) {
 }
 
 fetchPokemons();
-
 },{"./colors":3,"./pokemon-class":5,"./pokemon-types":6}],2:[function(require,module,exports){
 const COLORS = require('./colors')
 
 const Card = (props) => {
     const view = `
-       <h1 style="background: ${COLORS.colors.Dark}">CARD3</h1>`
+       <h1 style="background: ${COLORS.colors.Dark}">CARD3</h1>
+    `
     return view;
 }
 
