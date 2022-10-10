@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <link rel="stylesheet" href="./../css/main.css">
 </head>
 
@@ -67,7 +68,7 @@
                         <a href="#" class="navbar__links" id="kalos_page">
                             <div class="tooltip">
                                 <span>Kalos Pokedex</span>
-                                <span class="tooltiptext">See Kalos Pokemons</span>
+                                <span class="tooltiptext">Ver los pokemones de Kalos</span>
                             </div>
                         </a>
                     </li>
@@ -93,9 +94,13 @@
     </header>
     <main>
         <h1 style="padding: 25px;">
-            <img class="pokeball" src="./../assets/pokeball.svg" alt="pokeball image" width="30" />
+            <!--<img class="pokeball" src="./../assets/pokeball.svg" alt="pokeball image" width="30" /> -->
             <span id="region_title">Kanto Pokedex</span>
-            <div class="container" id="mainContainer">
+            <div class="pokeball_loader" id="pokeball_loaderid">
+                <h2>Cargando...</h2>
+                <img class="pokeball" src="./../assets/pokeball.svg" alt="pokeball image" width="100" />
+            </div>
+            <div class="main-container" id="mainContainer">
             </div>
     </main>
     <script src="./../src/bundle.js"></script>

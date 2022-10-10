@@ -11,7 +11,6 @@
     font-family: 'Kumbh Sans', sans-serif;
     scroll-behavior: smooth;
 }
-/* #region Body Styles*/
 body {
     background: #C9D6FF;
     background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
@@ -31,7 +30,13 @@ ul{
 h1 {
 	letter-spacing: 2px;
 }
-
+/* #region Body Styles*/
+.main-container{
+	display:grid;
+	grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: auto;
+    grid-gap: 1rem;
+}
 .poke-container {
 	display: flex;
 	flex-wrap: wrap;
@@ -42,7 +47,9 @@ h1 {
 }
 
 .pokemon {
-	background-color: hsl(0, 0%, 93%);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	border-radius: 20px;
 	box-shadow: 0 3px 15px hsla(0, 0%, 39%, 0.5);
 	margin: 10px;
@@ -52,7 +59,12 @@ h1 {
 
 /*Animation for the pokeballs to move*/
 .pokeball{
-	animation: rotate 1.5s infinite;
+	animation: rotate 2s infinite;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 @keyframes rotate {
@@ -63,27 +75,29 @@ h1 {
 		transform: rotate(-45deg);
 	}
 	50%{
-		transform: rotate(0deg);
-	}
-	70%{
 		transform: rotate(45deg);
 	}
-	100%{
+	75%{
 		transform: rotate(-45deg);
+	}
+	100%{
+		transform: rotate(45deg);
 	}
 }
 
 .img-container {
 	background-color: hsla(0, 0%, 100%, 0.6);
-	border-radius: 50%;
-	width: 120px;
-	height: 120px;
-	text-align: center;
+	border-radius: 20%;
+	width: 200px;
+	height: 200px;
+	align-self: center;
+	overflow: hidden;
 }
 
 .pokemon .img-container img {
-	margin-top: 10px;
-	max-width: 90%;
+	flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
 }
 
 .pokemon:hover {
@@ -92,6 +106,8 @@ h1 {
 
 .primary-icon, .secondary-icon{
 	transform: translateY(2px);
+	width: 15px;
+	height: 15px;
 }
 
 .pokemon .info {
@@ -111,231 +127,6 @@ h1 {
 	letter-spacing: 1px;
 }
 
-/*Get in Touch pannel CSS*/
-.social-panel-container {
-	position: fixed;
-	right: 0;
-	bottom: 80px;
-	transform: translateX(100%);
-	transition: transform 0.4s ease-in-out;
-}
-
-.social-panel-container.visible {
-	transform: translateX(-10px);
-}
-
-.social-panel {	
-	background-color: #fff;
-	border-radius: 16px;
-	box-shadow: 0 16px 31px -17px hsla(221, 100%, 19%, 0.671);
-	border: 5px solid hsl(260, 98%, 24%);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	font-family: 'Muli';
-	position: relative;
-	height: 169px;	
-	width: 370px;
-	max-width: calc(100% - 10px);
-}
-
-.social-panel button.close-btn {
-	border: 0;
-	color: hsl(180, 36%, 70%);
-	cursor: pointer;
-	font-size: 20px;
-	position: absolute;
-	top: 5px;
-	right: 5px;
-}
-
-.social-panel button.close-btn:focus {
-	outline: none;
-}
-
-.social-panel p {
-	background: #222;
-	background-image: repeating-linear-gradient(
-		to bottom,
-		transparent 7px,
-		rgba(0, 0, 0, 0.8) 5px,
-		rgba(0, 0, 0, 0.8) 7px,
-		transparent 7px
-	);
-	border-radius: 0 0 10px 10px;
-	color: #fff;
-	font-size: 14px;
-	line-height: 18px;
-	padding: 2px 15px 6px;
-	position: absolute;
-	top: 0;
-	left: 50%;
-	margin: 0;
-	transform: translateX(-50%);
-	text-align: center;
-	width: 230px;
-}
-
-.social-panel p i {
-	margin: 0 5px;
-}
-
-.social-panel p a {
-	color: #fce72a;
-	text-decoration: none;
-}
-
-.social-panel h4 {
-	margin: 20px 0;
-	color: #1f024d;	
-	font-family: 'Muli';	
-	font-size: 14px;	
-	line-height: 18px;
-	text-transform: uppercase;
-}
-
-.social-panel ul {
-	display: flex;
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-}
-
-.social-panel ul li {
-	margin: 0 10px;
-}
-
-.social-panel ul li a {
-	border: 1px solid #DCE1F2;
-	border-radius: 50%;
-	color: #001F61;
-	font-size: 18px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 40px;
-	width: 40px;
-	text-decoration: none;
-}
-
-.social-panel ul li a:hover {
-	border-color: #FF6A00;
-	box-shadow: 0 9px 12px -9px #FF6A00;
-}
-
-.floating-btn {
-	border-radius: 26.5px;
-	background-color: hsl(10, 98%, 25%);
-	border: 1px solid hsl(221, 100%, 19%);
-	box-shadow: 0 16px 22px -17px #03153B;
-	color: #fff;
-	text-shadow: 0 0 3px #00fff2;
-	cursor: pointer;
-	font-size: 16px;
-	line-height: 20px;
-	padding: 12px 20px;
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	z-index: 999;
-}
-
-.floating-btn:hover {
-	background-color: #ffffff;
-	color: #001F61;
-}
-
-.floating-btn:focus {
-	outline: none;
-}
-
-
-.floating-text {
-	background-color: #001F61;
-	border-radius: 10px 10px 0 0;
-	color: #fff;
-	font-family: 'Muli';
-	padding: 7px 15px;
-	position: fixed;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	text-align: center;
-	z-index: 998;
-}
-
-.close-btn{
-	background-color: #fff;
-}
-
-#cross:hover{
-	color: red;
-	animation: beat 1s linear infinite;;
-}
-
-#heart{
-	color: rgb(221, 29, 55);
-	text-shadow: 0 0 3px rgb(197, 19, 19), 0 0 5px rgb(189, 31, 31);
-	animation: beat 1s linear infinite;;
-}
-
-@keyframes beat{
-	0%{
-		transform: scale(0.5,0.5);
-		opacity: 0;
-	}
-	50%{
-		transform: scale(1,1);
-		opacity: .5;
-	}
-	100%{
-		transform: scale(1.2,1.2);
-		opacity: 1;
-	}
-}
-
-
-.floating-text a {
-	color: #FFa500;
-	text-decoration: none;
-}
-
-.text1{
-  	text-shadow: 0 0 3px #ffa500, 0 0 5px #ffa500, 0 0 7px #ffa500, 0 0 9px #ffa500, 0 0 11px #ff0000, 0 0 5px #ff8d00, 0 0 15px #ff0000;
-    color: #fff6a9;
-  	text-align: center;
-  	animation: blink 12s infinite;
-  	-webkit-animation: blink 12s infinite;
-}
-
-.social-panel, .floating-btn{
-	z-index: 0;
-}
-
-@-webkit-keyframes blink {
-	20%,24%,55% {
-		color: #111;
-	  	text-shadow: none;
-	}
-  
-	0%,19%,21%,23%,25%,54%,56%,100% {
-		text-shadow: 0 0 3px #ffa500, 0 0 5px #ffa500, 0 0 7px #ffa500, 0 0 9px #ffa500, 0 0 11px #ff0000, 0 0 5px #ff8d00, 0 0 15px #ff0000;
-	  	color: #fff6a9;
-	}
-}
-  
-@keyframes blink {
-	20%,24%,55% {
-	  	color: #111;
-	  	text-shadow: none;
-	}
-  
-	0%,19%,21%,23%,25%,54%,56%,100% {
-		text-shadow: 0 0 3px #ffa500, 0 0 5px #ffa500, 0 0 7px #ffa500, 0 0 9px #ffa500, 0 0 11px #ff0000, 0 0 5px #ff8d00, 0 0 15px #ff0000;
-	  	color: #fff6a9;
-	}
-}
 
 /* #endregion */
 
