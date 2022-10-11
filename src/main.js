@@ -8,7 +8,6 @@ const POKEMONCLASS = require('./pokemon-class');
 const mainContainer = document.getElementById("mainContainer");
 const regionTitle = document.getElementById("region_title")
 const pokeball_loader = document.getElementById('pokeball_loaderid');
-const body = document.getElementsByTagName("body");
 
 const navItemsList = [
     kantoPage = document.getElementById("kanto_page"),
@@ -65,12 +64,17 @@ menuLinks.addEventListener('click', hideMenu);
 
 //#region FUNCTIONS
 const fillScreen = async (id) => {
+
     pokeball_loader.style.display = 'block';
     mainContainer.style.opacity = '0.5';
+
     await API.fetchPokemons(id).then(data => {
+
         mainContainer.style.opacity = '1';
         mainContainer.innerHTML = "";
+
         pokeball_loader.style.display = 'none';
+
         data.forEach(item => {
             createPokemonCard(item);
         })
@@ -84,7 +88,6 @@ function createPokemonCard(pokemon) {
     // Padstart for 3 numbers position with '0' at the start.
     const id = pokemon.id.toString().padStart(3, '0')
 
-    // Get an array with pokemon types (Normal, Fire, water, etc.). Can be up to 2 types. First letter toUpperCase.
     const pokemon_types = pokemon.types.map(type => type.type.name[0].toUpperCase() + type.type.name.slice(1));
 
     const primaryType = pokemon_types[0];
@@ -92,25 +95,26 @@ function createPokemonCard(pokemon) {
     const secondaryType = new Array(pokemon_types[1]).filter(item => item != undefined);
     if (secondaryType.length == 0) secondaryType.push("")
 
-    // Set the color using the name of the type and the colors array with types names.
     const color = COLOR.colors[primaryType];
 
-    // Set the icons paths for the pokemon types
     const icon1 = new Array(TYPE.TypeIcons[primaryType]);
     const icon2 = new Array(TYPE.TypeIcons[secondaryType]).filter(item => item != undefined);
 
     const height = pokemon.height / 10;
-
     const weight = pokemon.weight / 10;
-
     const ability = pokemon.abilities.map(ability => ability.ability.name[0].toUpperCase() + ability.ability.name.slice(1)).join(", ");
 
     // Function to send dato to the card.
     let pokemonData = new POKEMONCLASS.pokemonData(id, name, primaryType, secondaryType, color, icon1, icon2, height, weight, ability);
+
     let card = document.createElement('div');
+
+    // CARD.Card(pokemonData); return card html from card.js
     card.innerHTML = CARD.Card(pokemonData);
+
     mainContainer.append(card);
 }
 //#endregion
+
 //onInit
 fillScreen('kanto_page');
