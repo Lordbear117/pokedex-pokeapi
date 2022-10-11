@@ -1,6 +1,4 @@
-const COLORS = require("./colors");
-const POKEMONCLASS = require('./pokemon-class');
-
+// Card creator
 const Card = (pokemon) => {
     const view = `
 <div class="pokemon" style="background-color: ${pokemon.color}">
